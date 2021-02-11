@@ -1,0 +1,1 @@
+clj -M:cljs:shadow-cljs compile app

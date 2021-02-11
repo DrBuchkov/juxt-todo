@@ -1,5 +1,5 @@
 (ns pro.juxt.core)
 
 
-(defn -main [& args]
+(defn init []
   (println "Hello World"))
