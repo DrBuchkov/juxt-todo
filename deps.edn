@@ -1,0 +1,21 @@
+{:aliases {:clj       {:extra-paths ["src/clj" "src/cljc"]
+                       :extra-deps  {org.clojure/clojure                 {:mvn/version "1.10.1"}
+                                     metosin/malli                       {:mvn/version "0.2.1"}
+                                     juxt/crux-core                      {:mvn/version "21.01-1.14.0-beta"}
+                                     yogthos/config                      {:mvn/version "1.1.7"}
+                                     org.clojure/core.match              {:mvn/version "1.0.0"}
+                                     mount/mount                         {:mvn/version "0.1.16"}
+                                     tick/tick                           {:mvn/version "0.4.29-alpha"}
+                                     com.brunobonacci/mulog              {:mvn/version "0.6.4"}
+                                     camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.2"}}}
+           :cljs      {:extra-paths ["src/cljs" "src/cljc"]
+                       :extra-deps  {org.clojure/clojurescript {:mvn/version "1.10.764"}
+                                     metosin/malli             {:mvn/version "0.2.1"}}}
+           :test-clj  {:extra-paths ["test/clj" "test/cljc" "config/test"]
+                       :extra-deps  {lambdaisland/kaocha {:mvn/version "1.0.732"}}
+                       :main-opts   ["-m" "kaocha.runner"]}
+           :test-cljs {:extra-paths ["test/cljs" "test/cljc"]
+                       :extra-deps  {lambdaisland/kaocha {:mvn/version "1.0.732"}}
+                       :main-opts   ["-m" "kaocha.runner"]}
+           :dev       {:extra-paths ["config/dev" "env/dev"]
+                       :extra-deps  {org.clojure/tools.namespace {:mvn/version "1.0.0"}}}}}
