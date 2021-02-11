@@ -3,3 +3,4 @@
 .cpcache/
 juxt-todo.iml
 public/js
+.shadow-cljs

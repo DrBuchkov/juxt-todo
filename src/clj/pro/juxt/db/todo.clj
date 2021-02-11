@@ -3,9 +3,7 @@
             [pro.juxt.todo :as todo]
             [malli.core :as m]
             [malli.util :as mu]
-            [crux.api :as crux]
-            [tick.alpha.api :as tick])
-  (:import (clojure.lang ExceptionInfo)))
+            [crux.api :as crux]))
 
 (defn create! [node todo]
   (when-not (todo/todo? todo)
