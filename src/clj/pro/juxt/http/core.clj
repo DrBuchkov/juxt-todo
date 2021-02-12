@@ -9,7 +9,8 @@
 (defstate handler :start
           (ring/ring-handler
             (ring/router
-              [["/ping" {:get (constantly (ok {:message "pong"}))}]])))
+              [["/api"
+                ["/ping" {:get (constantly (ok {:message "pong"}))}]]])))
 
 (defstate http-server
           :start (let [conf (-> env :http)
