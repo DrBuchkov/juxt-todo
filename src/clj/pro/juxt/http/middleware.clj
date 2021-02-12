@@ -14,7 +14,7 @@
           (case (:pro.juxt/error-type exception-data)
             :pro.juxt/not-found (not-found exception-data)
             :pro.juxt/validation-error (bad-request exception-data)
-            (internal-server-error exception-data))))
+            (internal-server-error "Oops, something went wrong"))))
 
       (catch Exception _
         (internal-server-error "Oops, something went wrong")))))
