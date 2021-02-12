@@ -1,5 +1,6 @@
 (ns pro.juxt.http.core
   (:require [pro.juxt.config.core :refer [env]]
+            [pro.juxt.http.middleware :refer [wrap-middleware]]
             [ring.util.http-response :refer [ok]]
             [mount.core :refer [defstate]]
             [ring.adapter.jetty :refer [run-jetty]]
@@ -8,12 +9,12 @@
 (defstate handler :start
           (ring/ring-handler
             (ring/router
-              [["/ping" {:get (constantly (ok "pong"))}]])))
+              [["/ping" {:get (constantly (ok {:message "pong"}))}]])))
 
 (defstate http-server
           :start (let [conf (-> env :http)
                        {:keys [port]} conf
-                       server (run-jetty #'handler conf)]
+                       server (run-jetty (wrap-middleware #'handler) conf)]
                    (println "Server started at port " port)
                    server)
           :stop (.stop http-server))

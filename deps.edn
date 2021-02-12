@@ -11,7 +11,8 @@
                                        camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.2"}
                                        metosin/reitit                      {:mvn/version "0.5.12"}
                                        ring/ring                           {:mvn/version "1.9.0"}
-                                       metosin/ring-http-response          {:mvn/version "0.9.2"}}}
+                                       metosin/ring-http-response          {:mvn/version "0.9.2"}
+                                       metosin/muuntaja                    {:mvn/version "0.6.8"}}}
 
            :cljs        {:extra-paths ["src/cljs" "src/cljc"]
                          :extra-deps  {org.clojure/clojurescript {:mvn/version "1.10.764"}
