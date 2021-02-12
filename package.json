@@ -1,0 +1,10 @@
+{
+  "name": "juxt-todo",
+  "version": "1.0.0",
+  "description": "TODO application for Juxt technical assessment",
+  "license": "ISC",
+  "dependencies": {
+    "react": "17.0.1",
+    "react-dom": "17.0.1"
+  }
+}

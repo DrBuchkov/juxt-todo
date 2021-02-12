@@ -10,7 +10,9 @@
                                        camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.2"}}}
            :cljs        {:extra-paths ["src/cljs" "src/cljc"]
                          :extra-deps  {org.clojure/clojurescript {:mvn/version "1.10.764"}
-                                       metosin/malli             {:mvn/version "0.2.1"}}}
+                                       metosin/malli             {:mvn/version "0.2.1"}
+                                       reagent/reagent           {:mvn/version "1.0.0"}
+                                       re-frame/re-frame         {:mvn/version "1.1.2"}}}
            :test-clj    {:extra-paths ["test/clj" "test/cljc" "config/test"]
                          :extra-deps  {lambdaisland/kaocha {:mvn/version "1.0.732"}}
                          :main-opts   ["-m" "kaocha.runner"]}
