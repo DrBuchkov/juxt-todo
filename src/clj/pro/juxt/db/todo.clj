@@ -3,7 +3,8 @@
             [pro.juxt.todo :as todo]
             [malli.core :as m]
             [malli.util :as mu]
-            [crux.api :as crux]))
+            [crux.api :as crux]
+            [pro.juxt.db.filters :refer [filters->clauses]]))
 
 (defn create! [node todo]
   (when-not (todo/todo? todo)
@@ -13,13 +14,16 @@
   (let [todo-id (utils/gen-uuid)]
     [todo-id (crux/submit-tx node [[:crux.tx/put (assoc todo :crux.db/id todo-id)]])]))
 
-(defn list-all
+(defn browse
   ([node]
-   (list-all node nil))
+   (browse node nil))
   ([node projection]
-   (let [res (crux/q (crux/db node)
-                     `{:find  [(eql/project ?todo ~(or projection '[*]))]
-                       :where [[?todo :todo/title]]})]
+   (browse node projection {}))
+  ([node projection filters]
+   (let [clauses (into `[[?entity :todo/title]] (filters->clauses `?entity filters))
+         res (crux/q (crux/db node)
+                     `{:find  [(eql/project ?entity ~(or projection '[*]))]
+                       :where ~clauses})]
      (-> res seq flatten))))
 
 (defn fetch

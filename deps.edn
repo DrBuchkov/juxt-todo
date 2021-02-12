@@ -13,13 +13,13 @@
                                        metosin/malli             {:mvn/version "0.2.1"}
                                        reagent/reagent           {:mvn/version "1.0.0"}
                                        re-frame/re-frame         {:mvn/version "1.1.2"}}}
-           :test-clj    {:extra-paths ["test/clj" "test/cljc" "config/test"]
+           :test-clj    {:extra-paths ["test/clj" "test/cljc" "config/clj/test"]
                          :extra-deps  {lambdaisland/kaocha {:mvn/version "1.0.732"}}
                          :main-opts   ["-m" "kaocha.runner"]}
            :test-cljs   {:extra-paths ["test/cljs" "test/cljc"]
                          :extra-deps  {lambdaisland/kaocha {:mvn/version "1.0.732"}}
                          :main-opts   ["-m" "kaocha.runner"]}
-           :dev         {:extra-paths ["config/dev" "env/dev"]
+           :dev         {:extra-paths ["config/clj/dev" "env/clj/dev"]
                          :extra-deps  {org.clojure/tools.namespace {:mvn/version "1.0.0"}}}
            :shadow-cljs {:extra-deps {thheller/shadow-cljs {:mvn/version "2.11.18"}}
                          :main-opts  ["-m" "shadow.cljs.devtools.cli"]}}}
