@@ -6,4 +6,4 @@
 
 (defstate ^ICruxAPI node
           :start (crux/start-node (:crux/config env))
-          :close (.close node))
+          :stop (.close node))

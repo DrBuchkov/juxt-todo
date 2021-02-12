@@ -1,7 +1,9 @@
 (ns user
   (:require [mount.core :as mount]
             [clojure.tools.namespace.repl :as tn]
-            [pro.juxt.core :as config]))
+            [pro.juxt.core :as config]
+            [pro.juxt.http.core :as http]
+            [pro.juxt.db.core :as db]))
 
 (defn refresh-ns
   "Refresh/reloads all the namespace"

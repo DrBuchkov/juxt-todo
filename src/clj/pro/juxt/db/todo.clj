@@ -45,7 +45,6 @@
         updated-value (merge prev-value todo)]
     [todo-id (crux/submit-tx node [[:crux.tx/put updated-value]])]))
 
-
 (defn delete! [node todo-id]
   (let [todo (fetch node todo-id [:crux.db/id])]
     (when (empty? todo)

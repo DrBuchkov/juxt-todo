@@ -1,0 +1,1 @@
+clj -M:cljs:dev-cljs:shadow-cljs watch app

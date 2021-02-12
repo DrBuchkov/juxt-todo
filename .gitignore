@@ -5,3 +5,5 @@ juxt-todo.iml
 public/js
 .shadow-cljs
 node_modules/
+target
+classes
