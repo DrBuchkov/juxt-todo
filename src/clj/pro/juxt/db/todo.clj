@@ -1,6 +1,6 @@
 (ns pro.juxt.db.todo
   (:require [pro.juxt.utils :as utils]
-            [pro.juxt.todo :as todo]
+            [pro.juxt.entities.todo :as todo]
             [malli.core :as m]
             [malli.util :as mu]
             [crux.api :as crux]

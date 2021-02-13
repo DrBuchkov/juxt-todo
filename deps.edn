@@ -18,6 +18,7 @@
                          :extra-deps  {org.clojure/clojurescript {:mvn/version "1.10.764"}
                                        metosin/malli             {:mvn/version "0.2.1"}
                                        reagent/reagent           {:mvn/version "1.0.0"}
+                                       mount/mount               {:mvn/version "0.1.16"}
                                        re-frame/re-frame         {:mvn/version "1.1.2"}}}
 
            :test-clj    {:extra-paths ["test/clj" "test/cljc" "config/clj/test"]
@@ -35,6 +36,8 @@
                          :extra-deps  {binaryage/devtools {:mvn/version "1.0.2"}}}
 
            :prod        {:extra-paths ["config/clj/prod"]}
+
+           :prod-cljs   {:extra-paths ["config/cljs/prod"]}
 
            :depstar     {:extra-deps {seancorfield/depstar {:mvn/version "1.1.136"}}
                          :exec-fn    hf.depstar/uberjar

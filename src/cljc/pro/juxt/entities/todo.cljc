@@ -1,4 +1,4 @@
-(ns pro.juxt.todo
+(ns pro.juxt.entities.todo
   (:require [malli.core :as m]))
 
 (def Todo

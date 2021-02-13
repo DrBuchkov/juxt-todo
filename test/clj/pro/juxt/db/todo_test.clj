@@ -3,7 +3,7 @@
             [pro.juxt.db.todo :refer [create! browse fetch edit! delete!]]
             [malli.generator :as mg]
             [pro.juxt.db.with-db :refer [with-db *node*]]
-            [pro.juxt.todo :refer [Todo todo?]]
+            [pro.juxt.entities.todo :refer [Todo todo?]]
             [clojure.spec.gen.alpha :as gen]
             [malli.core :as m]
             [crux.api :as crux]))

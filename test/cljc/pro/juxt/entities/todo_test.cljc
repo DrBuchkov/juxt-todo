@@ -1,6 +1,6 @@
-(ns pro.juxt.todo-test
+(ns pro.juxt.entities.todo-test
   (:require [clojure.test :refer :all])
-  (:require [pro.juxt.todo :refer :all]))
+  (:require [pro.juxt.entities.todo :refer :all]))
 
 (deftest todo?-test
   (testing "Valid Todos"

@@ -1,6 +1,9 @@
 (ns pro.juxt.core
-  (:require [reagent.core :as r]
-            [reagent.dom :as rd]))
+  (:require [reagent.dom :as rd]
+            [mount.core :as mount]))
+
+(defn mount-components! []
+  (mount/start))
 
 (defn app []
   [:h1 "Hello World!"])
@@ -9,5 +12,6 @@
   (rd/render [app] (.getElementById js/document "app")))
 
 (defn init! []
+  (mount-components!)
   (mount!))
 
