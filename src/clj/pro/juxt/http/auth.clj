@@ -8,10 +8,10 @@
     (let [authorization-headers (-> req
                                     :headers
                                     (get "authorization"))
-          decoder (authorization {})
+          auth-decoder (authorization {})
           {:juxt.reap.alpha.rfc7235/keys [auth-scheme token68]} (-> authorization-headers
                                                                     re/input
-                                                                    decoder)]
+                                                                    auth-decoder)]
       (when-not (and (= auth-scheme (-> env :http :auth-scheme))
                      (= token68 (-> env :http :auth-token)))
         (throw (ex-info "Unauthorized" {:pro.juxt/error-type :pro.juxt/unauthorized

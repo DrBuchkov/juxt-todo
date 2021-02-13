@@ -12,13 +12,13 @@
       (handler req)
 
       (catch ExceptionInfo e
+        (log/error e)
         (let [exception-data (ex-data e)]
           (case (:pro.juxt/error-type exception-data)
             :pro.juxt/not-found (not-found exception-data)
             :pro.juxt/validation-error (bad-request exception-data)
             :pro.juxt/unauthorized (unauthorized "Unauthorized")
-            (do (log/error e)
-                (internal-server-error "Oops, something went wrong")))))
+            (internal-server-error "Oops, something went wrong"))))
 
       (catch Exception e
         (log/error e)
