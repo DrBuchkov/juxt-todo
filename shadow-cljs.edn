@@ -1,9 +1,9 @@
 {:deps   {:aliases [:cljs]}
  :nrepl  {:port 7002}
  :builds {:app {:target     :browser
-                :modules    {:base {:init-fn pro.juxt.core/init}}
+                :modules    {:base {:entries [pro.juxt.app]}}
                 :output-dir "public/js/compiled"
                 :asset-path "/js/compiled"
                 :devtools   {:http-root  "public"
                              :http-port  8700
-                             :after-load pro.juxt.core/reload!}}}}
+                             :after-load pro.juxt.app/reload!}}}}

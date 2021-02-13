@@ -3,13 +3,11 @@
             [reagent.dom :as rd]))
 
 (defn app []
-  [:h1 "Hello World"])
+  [:h1 "Hello World!"])
 
 (defn mount! []
   (rd/render [app] (.getElementById js/document "app")))
 
-(defn init []
+(defn init! []
   (mount!))
 
-(defn reload! []
-  (mount!))
