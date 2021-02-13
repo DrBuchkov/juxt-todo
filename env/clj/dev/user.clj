@@ -1,9 +1,9 @@
 (ns user
-  (:require [mount.core :as mount]
-            [clojure.tools.namespace.repl :as tn]
-            [pro.juxt.core :as config]
+  (:require [clojure.tools.namespace.repl :as tn]
+            [pro.juxt.core :refer [start-app! stop-app!]]
             [pro.juxt.http.core :as http]
-            [pro.juxt.db.core :as db]))
+            [pro.juxt.db.core :as db]
+            [clojure.tools.logging :as log]))
 
 (defn refresh-ns
   "Refresh/reloads all the namespace"
@@ -13,12 +13,12 @@
 (defn start
   "Mount starts life cycle of runtime state"
   []
-  (mount/start))
+  (start-app!))
 
 (defn stop
   "Mount stops life cycle of runtime state"
   []
-  (mount/stop))
+  (stop-app!))
 
 (defn restart-dev
   []

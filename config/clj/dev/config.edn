@@ -1,3 +1,5 @@
 {:crux/config {}
- :http        {:port 8080
-               :join? false}}
+ :http        {:port        8080
+               :join?       false
+               :auth-scheme "Basic"
+               :auth-token  "secret"}}
