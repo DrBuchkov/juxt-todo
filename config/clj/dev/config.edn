@@ -1,5 +1,5 @@
 {:crux/config {}
  :http        {:port        8080
                :join?       false
-               :auth-scheme "Basic"
+               :auth-scheme "Bearer"
                :auth-token  "secret"}}

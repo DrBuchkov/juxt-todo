@@ -39,7 +39,6 @@
                            (mg/sample {:size 3})
                            distinct
                            vec)
-            _ (println projection)
             todos (browse *node* projection)]
         (is (not (empty? todos)))
         (is (= todos

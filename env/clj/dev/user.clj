@@ -3,6 +3,7 @@
             [pro.juxt.core :refer [start-app! stop-app!]]
             [pro.juxt.http.core :as http]
             [pro.juxt.db.core :as db]
+            [pro.juxt.seed :refer [seed-db!]]
             [clojure.tools.logging :as log]))
 
 (defn refresh-ns

@@ -16,9 +16,6 @@
                 (todo-routes)]])))
 
 (defstate http-server
-          :start (let [conf (-> env :http)
-                       {:keys [port]} conf
-                       server (run-jetty (wrap-middleware #'handler) conf)]
-                   (println "Server started at port " port)
-                   server)
+          :start (let [conf (-> env :http)]
+                   (run-jetty (wrap-middleware #'handler) conf))
           :stop (.stop http-server))
