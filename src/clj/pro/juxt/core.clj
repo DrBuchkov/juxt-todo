@@ -14,5 +14,5 @@
     (log/info component "stopped")))
 
 (defn -main [& args]
-  (println "Hello World!")
-  (.addShutdownHook (Runtime/getRuntime) (Thread. ^Runnable (fn []))))
+  (start-app!)
+  (.addShutdownHook (Runtime/getRuntime) (Thread. ^Runnable stop-app!)))
