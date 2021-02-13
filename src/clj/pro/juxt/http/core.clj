@@ -5,8 +5,7 @@
             [ring.util.http-response :refer [ok]]
             [mount.core :refer [defstate]]
             [ring.adapter.jetty :refer [run-jetty]]
-            [reitit.ring :as ring]
-            [clojure.tools.logging :as log]))
+            [reitit.ring :as ring]))
 
 (defstate handler :start
           (ring/ring-handler
