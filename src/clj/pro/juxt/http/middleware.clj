@@ -1,5 +1,6 @@
 (ns pro.juxt.http.middleware
   (:require [pro.juxt.http.auth :refer [wrap-authorization]]
+            [pro.juxt.utils :refer [remove-ns-from-coll]]
             [muuntaja.middleware :as middleware]
             [ring.util.http-response :refer [not-found bad-request unauthorized internal-server-error]]
             [ring.middleware.params :refer [wrap-params]]
@@ -24,17 +25,10 @@
         (log/error e)
         (internal-server-error "Oops, something went wrong")))))
 
-(defn remove-ns-from-res [x]
-  (let [remove-ns-from-map (partial clojure.walk/walk (fn [[k v]] [(name k) v])
-                                    identity)]
-    (cond (map? x) (remove-ns-from-map x)
-          (seq? x) (map remove-ns-from-map x)
-          :else x)))
-
 (defn wrap-remove-ns [handler]
   (fn [req]
     (let [res (handler req)]
-      (update res :body remove-ns-from-res))))
+      (update res :body remove-ns-from-coll))))
 
 (defn wrap-middleware [handler]
   (-> handler
