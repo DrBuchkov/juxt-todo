@@ -24,14 +24,17 @@
         (log/error e)
         (internal-server-error "Oops, something went wrong")))))
 
-(defn remove-ns [x]
-  (->> x (map (fn [item] (clojure.walk/walk (fn [[k v]] [(name k) v])
-                                            identity item)))))
+(defn remove-ns-from-res [x]
+  (let [remove-ns-from-map (partial clojure.walk/walk (fn [[k v]] [(name k) v])
+                                    identity)]
+    (cond (map? x) (remove-ns-from-map x)
+          (seq? x) (map remove-ns-from-map x)
+          :else x)))
 
 (defn wrap-remove-ns [handler]
   (fn [req]
     (let [res (handler req)]
-      (update res :body remove-ns))))
+      (update res :body remove-ns-from-res))))
 
 (defn wrap-middleware [handler]
   (-> handler
