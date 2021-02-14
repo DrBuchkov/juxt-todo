@@ -1,15 +1,13 @@
 (ns pro.juxt.core
   (:require [pro.juxt.components.sidenav :refer [sidenav]]
             [pro.juxt.todo.routes :as todo]
+            [pro.juxt.utils :as utils]
             [pro.juxt.events]
             [mount.core :as mount]
             [reagent.dom :as rd]
             [re-frame.core :as rf]
             [reitit.core :as reitit]
             [reitit.frontend.easy :as rfe]))
-
-(defn navigate! [match _]
-  (rf/dispatch [:common/navigate match]))
 
 (defn app []
   (if-let [page @(rf/subscribe [:common/page])]
@@ -27,13 +25,13 @@
       {:class "flex flex-col w-10/12 bg-white h-100vh border-r p-6"}
       [page]]]))
 
-(defn redirect-page! [uri]
-  (set! (-> js/document .-location .-href) uri))
-
 (def router
   (reitit/router
-    [["/" {:controllers [{:start (fn [_] (redirect-page! "#/todo/create"))}]}]
+    [["/" {:controllers [{:start (fn [_] (utils/redirect-page! "#/todo/create"))}]}]
      (todo/routes)]))
+
+(defn navigate! [match _]
+  (rf/dispatch [:common/navigate match]))
 
 (defn start-router! []
   (rfe/start!

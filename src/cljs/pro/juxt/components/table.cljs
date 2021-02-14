@@ -2,7 +2,7 @@
 
 
 (defn table []
-  [:div
+  [:div.p-6
    [:table.min-w-full.table-auto
     [:thead.justify-between
      [:tr.bg-gray-800
