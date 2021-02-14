@@ -24,9 +24,19 @@
         (log/error e)
         (internal-server-error "Oops, something went wrong")))))
 
+(defn remove-ns [x]
+  (->> x (map (fn [item] (clojure.walk/walk (fn [[k v]] [(name k) v])
+                                            identity item)))))
+
+(defn wrap-remove-ns [handler]
+  (fn [req]
+    (let [res (handler req)]
+      (update res :body remove-ns))))
+
 (defn wrap-middleware [handler]
   (-> handler
       wrap-authorization
       wrap-errors
       wrap-params
+      wrap-remove-ns
       middleware/wrap-format))
