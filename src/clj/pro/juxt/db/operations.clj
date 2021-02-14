@@ -2,6 +2,7 @@
   (:require [pro.juxt.utils :as utils]
             [malli.core :as m]
             [malli.util :as mu]
+            [malli.error :as me]
             [crux.api :as crux]
             [pro.juxt.db.filters :refer [filters->clauses]]))
 
@@ -18,7 +19,8 @@
     (when-not (m/validate spec entity)
       (throw (ex-info "Invalid TODO"
                       {:pro.juxt/error-type :pro.juxt/validation-error
-                       :pro.juxt/error-data (m/explain spec entity)})))
+                       :pro.juxt/error-data (-> (m/explain spec entity)
+                                                (me/humanize))})))
     (let [todo-id (utils/gen-uuid)]
       [todo-id (crux/submit-tx node [[:crux.tx/put (assoc entity :crux.db/id todo-id)]])])))
 
@@ -48,7 +50,8 @@
     (when-not (m/validate (mu/optional-keys spec) entity)
       (throw (ex-info "Given data does not conform entity's specification."
                       {:pro.juxt/error-type :pro.juxt/validation-error
-                       :pro.juxt/error-data (m/explain (mu/optional-keys spec) entity)})))
+                       :pro.juxt/error-data (-> (m/explain (mu/optional-keys spec) entity)
+                                                (me/humanize))})))
     (let [prev-value (fetch node entity-id)
           _ (when-not prev-value
               (throw (ex-info "No entity with such id to edit."

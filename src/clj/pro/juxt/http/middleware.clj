@@ -33,7 +33,7 @@
 (defn wrap-middleware [handler]
   (-> handler
       wrap-authorization
-      wrap-errors
       wrap-params
       wrap-remove-ns
+      wrap-errors
       middleware/wrap-format))

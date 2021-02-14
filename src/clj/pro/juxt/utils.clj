@@ -15,7 +15,7 @@
         query-params))
 
 (defn remove-ns-from-coll [x]
-  (let [remove-ns-from-map (partial clojure.walk/walk (fn [[k v]] [(name k) v])
+  (let [remove-ns-from-map (partial walk (fn [[k v]] [(name k) v])
                                     identity)]
     (cond (map? x) (remove-ns-from-map x)
           (seq? x) (map remove-ns-from-map x)
