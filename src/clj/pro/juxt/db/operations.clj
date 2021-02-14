@@ -58,7 +58,7 @@
                               {:pro.juxt/error-type :pro.juxt/not-found
                                :pro.juxt/error-data {:id entity-id}})))
           updated-value (merge prev-value entity)]
-      [entity-id (crux/submit-tx node [[:crux.tx/put updated-value]])])))
+      [entity-id updated-value (crux/submit-tx node [[:crux.tx/put updated-value]])])))
 
 (defn delete!-fn [fetch]
   (fn [node entity-id]
@@ -66,4 +66,4 @@
       (when (empty? todo)
         (throw (ex-info "No entity with such id to delete." {:pro.juxt/error-type :pro.juxt/not-found
                                                              :pro.juxt/error-data {:id entity-id}})))
-      (crux/submit-tx node [[:crux.tx/delete entity-id]]))))
+      [entity-id (crux/submit-tx node [[:crux.tx/delete entity-id]])])))

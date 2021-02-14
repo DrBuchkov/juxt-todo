@@ -80,7 +80,7 @@
         _ (crux/await-tx *node* tx)
         prev-todo (fetch *node* todo-id)
         update-data {:todo/title "Wash the dishes"}
-        [_ tx] (edit! *node* todo-id update-data)
+        [_ _ tx] (edit! *node* todo-id update-data)
         _ (crux/await-tx *node* tx)
         updated-todo (fetch *node* todo-id)]
     (is (= updated-todo (merge prev-todo update-data)))))
@@ -89,7 +89,7 @@
   (let [todo (gen/generate todo-gen)
         [todo-id tx] (create! *node* todo)
         _ (crux/await-tx *node* tx)
-        tx (delete! *node* todo-id)
+        [_ tx] (delete! *node* todo-id)
         _ (crux/await-tx *node* tx)]
 
     (is (= nil (fetch *node* todo-id)))))

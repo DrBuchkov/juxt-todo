@@ -6,4 +6,4 @@
             [ring.util.http-response :refer [ok]]))
 
 
-(defn todo-routes [] (gen-routes "todo" todo/create! todo/browse todo/fetch))
+(defn todo-routes [] (gen-routes "todo" todo/create! todo/browse todo/fetch todo/edit! todo/delete!))
