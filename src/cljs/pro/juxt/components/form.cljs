@@ -9,6 +9,7 @@
 (defn on-change [entity id]
   (fn [e]
     (swap! entity assoc id (-> e .-target .-value))))
+
 (defn row [field]
   [:div.w-full.px-3.mb-6.md:mb-0 {:class "md:w-1/2"}
    field])

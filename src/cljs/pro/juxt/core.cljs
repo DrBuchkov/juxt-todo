@@ -3,6 +3,7 @@
             [pro.juxt.todo.routes :as todo]
             [pro.juxt.utils :as utils]
             [pro.juxt.events]
+            [pro.juxt.routing]
             [mount.core :as mount]
             [reagent.dom :as rd]
             [re-frame.core :as rf]
@@ -31,7 +32,7 @@
      (todo/routes)]))
 
 (defn navigate! [match _]
-  (rf/dispatch [:common/navigate match]))
+  (rf/dispatch [:nav/navigate match]))
 
 (defn start-router! []
   (rfe/start!
