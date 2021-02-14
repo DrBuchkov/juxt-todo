@@ -11,7 +11,7 @@
             [reitit.frontend.easy :as rfe]))
 
 (defn app []
-  (if-let [page @(rf/subscribe [:common/page])]
+  (if-let [page @(rf/subscribe [:nav/page])]
     [:div.min-h-screen.flex.flex-auto.flex-shrink-0.antialiased.bg-gray-50.text-gray-800
      [sidenav "TODOer" [{:title    "TODOs"
                          :children [{:title "Create TODO"

@@ -3,14 +3,14 @@
 
 (defn nav-link [uri title page]
   [:a {:href  uri
-       :class (when (= page @(rf/subscribe [:common/page])) :is-active)}
+       :class (when (= page @(rf/subscribe [:nav/page])) :is-active)}
    title])
 
 (defn submenu-child [{:keys [title icon uri page]}]
   [:li
    [:a.relative.flex.flex-row.items-center.h-11.focus:outline-none.hover:bg-gray-50.text-gray-600.hover:text-gray-800.border-l-4.border-transparent.hover:border-indigo-500.pr-6
     {:href  uri
-     :class (when (= page @(rf/subscribe [:common/page])) :is-active)}
+     :class (when (= page @(rf/subscribe [:nav/page])) :is-active)}
     [:span.inline-flex.justify-center.items-center.ml-4
      [:i {:class (str "fa " icon)}]]
     [:span.ml-2.text-sm.tracking-wide.truncate

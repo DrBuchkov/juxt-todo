@@ -28,7 +28,7 @@
     (-> db :nav/route)))
 
 (rf/reg-sub
-  :common/page
+  :nav/page
   :<- [:nav/route]
   (fn [route _]
     (-> route :data :view)))
