@@ -13,7 +13,8 @@
                                        metosin/muuntaja           {:mvn/version "0.6.8"}
                                        juxt/reap                  {:git/url "https://github.com/juxt/reap.git"
                                                                    :sha     "090b8b6c135a372b86e7130474beea1ceada8b3d"}
-                                       org.slf4j/slf4j-simple     {:mvn/version "1.7.30"}}}
+                                       org.slf4j/slf4j-simple     {:mvn/version "1.7.30"}
+                                       ring-cors/ring-cors        {:mvn/version "0.1.13"}}}
 
            :cljs        {:extra-paths ["src/cljs" "src/cljc"]
                          :extra-deps  {org.clojure/clojurescript           {:mvn/version "1.10.764"}
@@ -23,6 +24,7 @@
                                        mount/mount                         {:mvn/version "0.1.16"}
                                        metosin/reitit                      {:mvn/version "0.5.12"}
                                        re-frame/re-frame                   {:mvn/version "1.1.2"}
+                                       day8.re-frame/http-fx               {:mvn/version "0.2.2"}
                                        camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.2"}
                                        org.clojure/core.match              {:mvn/version "1.0.0"}}}
 

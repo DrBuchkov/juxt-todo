@@ -5,9 +5,9 @@
 
 (defn wrap-authorization [handler]
   (fn [req]
-    (let [authorization-headers (-> req
-                                    :headers
-                                    (get "authorization"))
+    (let [authorization-headers (or (-> req
+                                        :headers
+                                        (get "authorization")) "")
           auth-decoder (authorization {})
           {:juxt.reap.alpha.rfc7235/keys [auth-scheme token68]} (-> authorization-headers
                                                                     re/input

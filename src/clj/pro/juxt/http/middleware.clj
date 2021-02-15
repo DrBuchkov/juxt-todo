@@ -2,8 +2,9 @@
   (:require [pro.juxt.http.auth :refer [wrap-authorization]]
             [pro.juxt.utils :refer [remove-ns-from-coll]]
             [muuntaja.middleware :as middleware]
-            [ring.util.http-response :refer [not-found bad-request unauthorized internal-server-error]]
+            [ring.util.http-response :refer [ok not-found bad-request unauthorized internal-server-error]]
             [ring.middleware.params :refer [wrap-params]]
+            [ring.middleware.cors :refer [wrap-cors]]
             [clojure.tools.logging :as log])
   (:import (clojure.lang ExceptionInfo)))
 
@@ -13,13 +14,14 @@
       (handler req)
 
       (catch ExceptionInfo e
-        (log/error e)
         (let [exception-data (ex-data e)]
           (case (:pro.juxt/error-type exception-data)
             :pro.juxt/not-found (not-found exception-data)
             :pro.juxt/validation-error (bad-request exception-data)
             :pro.juxt/unauthorized (unauthorized "Unauthorized")
-            (internal-server-error "Oops, something went wrong"))))
+            (do
+              (log/error e)
+              (internal-server-error "Oops, something went wrong")))))
 
       (catch Exception e
         (log/error e)
@@ -32,8 +34,9 @@
 
 (defn wrap-middleware [handler]
   (-> handler
-      wrap-authorization
       wrap-params
-      wrap-remove-ns
+      wrap-authorization
       wrap-errors
+      (wrap-cors :access-control-allow-origin [#".*"]
+                 :access-control-allow-methods [:get :put :post :delete])
       middleware/wrap-format))

@@ -4,7 +4,8 @@
             [reagent-forms.core :refer [bind-fields init-field value-of]]
             [reagent.core :as r]
             [cljs.core.match :refer [match]]
-            [malli.core :as m]))
+            [malli.core :as m]
+            [re-frame.core :as rf]))
 
 (defn on-change [entity id]
   (fn [e]
@@ -75,7 +76,7 @@
   [:div.p-6
    [spec->fields entity spec]])
 
-(defn form [spec]
+(defn form [spec event]
   (let [entity (r/atom {})]
     (fn [spec]
       [:form {:on-submit (fn [e]
@@ -85,5 +86,5 @@
        [:button.mr-5.bg-green-600.hover:bg-green-700.text-white.font-bold.py-2.px-6.rounded-lg
         {:on-click
          (fn []
-           (println @entity))}
+           (rf/dispatch [event @entity]))}
         "Save"]])))
