@@ -31,7 +31,8 @@
     ([node projection]
      (browse node projection {}))
     ([node projection filters]
-     (let [unique-kw (find-first-req-key spec)
+     (let [projection (when projection (into [:crux.db/id] projection))
+           unique-kw (find-first-req-key spec)
            clauses (into `[[?entity ~unique-kw]] (filters->clauses `?entity filters))
            res (crux/q (crux/db node)
                        `{:find  [(eql/project ?entity ~(or projection '[*]))]

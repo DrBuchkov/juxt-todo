@@ -14,14 +14,14 @@
   (if-let [page @(rf/subscribe [:nav/page])]
     [:div.min-h-screen.flex.flex-auto.flex-shrink-0.antialiased.bg-gray-50.text-gray-800
      [sidenav "TODOer" [{:title    "TODOs"
-                         :children [{:title "Create TODO"
-                                     :icon  "fa-pencil"
-                                     :uri   "#/todo/create"
-                                     :page  :todo/create}
-                                    {:title "List TODOs"
+                         :children [{:title "List TODOs"
                                      :icon  "fa-list"
                                      :uri   "#/todo/list"
-                                     :page  :todo/list}]}]]
+                                     :page  :todo/list}
+                                    {:title "Create TODO"
+                                     :icon  "fa-pencil"
+                                     :uri   "#/todo/create"
+                                     :page  :todo/create}]}]]
      [:div
       {:class "flex flex-col w-10/12 bg-white h-100vh border-r p-6"}
       [page]]]))
