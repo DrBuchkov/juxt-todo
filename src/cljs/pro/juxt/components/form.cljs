@@ -3,7 +3,8 @@
             [reagent-forms.core :refer [bind-fields init-field value-of]]
             [reagent.core :as r]
             [cljs.core.match :refer [match]]
-            [malli.core :as m]))
+            [malli.core :as m]
+            [re-frame.core :as rf]))
 
 (defn on-change [entity id]
   (fn [e]
@@ -78,8 +79,9 @@
   [:div.p-6
    [spec->fields entity spec]])
 
-(defn form [spec on-submit text]
-  (let [entity (r/atom {})]
+(defn form [spec on-submit text key]
+  (let [entity (r/atom (if key @(rf/subscribe [:todo])
+                               {}))]
     (fn [spec]
       [:form {:on-submit (on-submit entity)}
        [form-template entity spec]

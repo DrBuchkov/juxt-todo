@@ -2,7 +2,6 @@
   (:require [pro.juxt.components.sidenav :refer [sidenav]]
             [pro.juxt.todo.routes :as todo]
             [pro.juxt.utils :as utils]
-            [pro.juxt.events]
             [pro.juxt.routing]
             [mount.core :as mount]
             [reagent.dom :as rd]
