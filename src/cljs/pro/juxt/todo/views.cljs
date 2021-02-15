@@ -4,8 +4,7 @@
             [pro.juxt.todo.ajax]
             [pro.juxt.entities.todo :as todo]
             [re-frame.core :as rf]
-            [pro.juxt.utils :as utils]))
-
+            [cljs-uuid-utils.core :as uuid]))
 
 (defn create-view []
   [:h1 "Create TODO"
@@ -19,4 +18,12 @@
   [:div
    [:h1 "List TODO"]
    [:div.p-16
-    [table todo/Todo :todos]]])
+    [table todo/Todo :todos {:delete (fn [entity]
+                                       [:span.inline-flex.justify-center.items-center.ml-4
+                                        [:i.fa.fa-times.fa-lg.cursor-pointer
+                                         {:title    "Delete"
+                                          :on-click (fn [_]
+                                                      (rf/dispatch [:todo/delete (-> entity
+                                                                                     :crux.db/id
+                                                                                     uuid/uuid-string)])
+                                                      (println "Deleting!!"))}]])}]]])

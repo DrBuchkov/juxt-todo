@@ -1,5 +1,6 @@
 (ns pro.juxt.todo.ajax
   (:require [re-frame.core :as rf]
+            [ajax.core :as ajax]
             [ajax.edn :refer [edn-request-format edn-response-format]]
             [pro.juxt.config :as config]
             [pro.juxt.utils :as utils]))
@@ -8,7 +9,6 @@
 (rf/reg-event-fx
   :todo/create
   (fn [_ [_ val]]
-    (println "Hello World")
     {:http-xhrio {:method          :post
                   :uri             (str (config/uri) "/todo")
                   :params          val
@@ -31,6 +31,8 @@
   (fn [db [_ result]]
     (println "Failed to create TODO")
     db))
+
+;; Browse
 
 (rf/reg-event-fx
   :todo/browse
@@ -59,3 +61,27 @@
   :todos
   (fn [db _]
     (-> db :todos)))
+
+(rf/reg-event-fx
+  :todo/delete
+  (fn [_ [_ val]]
+    {:http-xhrio {:method          :delete
+                  :uri             (str (config/uri) "/todo/" val)
+                  :headers         {"Authorization" "Bearer secret"}
+                  :timeout         5000
+                  :format          (edn-request-format)
+                  :response-format (edn-response-format)
+                  :on-success      [:todo/delete-success]
+                  :on-failure      [:todo/delete-fail]}}))
+
+(rf/reg-event-db
+  :todo/delete-success
+  (fn [db [_ data]]
+    (rf/dispatch [:todo/browse])
+    db))
+
+(rf/reg-event-db
+  :todo/delete-fail
+  (fn [db [_ result]]
+    (println "Failed to fetch TODOs")
+    db))

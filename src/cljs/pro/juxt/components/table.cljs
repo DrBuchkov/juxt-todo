@@ -24,7 +24,7 @@
        (filter should-display?)
        (map col-opts)))
 
-(defn row [cols item opts]
+(defn row [cols item opts actions]
   [:tr.bg-white.border-4.border-gray-200
    (map (fn [[key] {:keys [display-fn]}]
           ^{:key key}
@@ -32,18 +32,24 @@
            (if display-fn
              [display-fn (key item) item]
              (key item))])
-        cols opts)])
+        cols opts)
+   [:td.px-16.py-2
+    (for [[key action] actions]
+      ^{:key key} [action item])]])
 
-(defn rows [cols items opts]
+(defn rows [cols items opts actions]
   [:<>
    (for [item items]
      ^{:key (:crux.db/id item)}
-     [row cols item opts])])
+     [row cols item opts actions])])
 
-(defn table [spec key]
+(defn table [spec key actions]
   (fn [spec key]
     (let [items @(rf/subscribe [key])
-          cols (spec->cols spec)
+          cols (if (not (empty? actions))
+                 (concat (spec->cols spec)
+                         [[:actions "Actions"]])
+                 (spec->cols spec))
           opts (spec->opts spec)]
       [:div
        [:table.min-w-full.table-auto
@@ -54,4 +60,4 @@
             [:th.px-16.py-2
              [:span.text-gray-300 col]])]]
         [:tbody.bg-gray-200
-         [rows cols items opts]]]])))
+         [rows cols items opts actions]]]])))
