@@ -38,5 +38,5 @@
       wrap-authorization
       wrap-errors
       (wrap-cors :access-control-allow-origin [#".*"]
-                 :access-control-allow-methods [:get :put :post :delete])
+                 :access-control-allow-methods [:get :put :post :delete :patch])
       middleware/wrap-format))

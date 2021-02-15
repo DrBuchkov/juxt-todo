@@ -118,22 +118,20 @@
 (rf/reg-event-fx
   :todo/edit
   (fn [_ [_ id val]]
-    (println id)
-    (println val)
-    #_{:http-xhrio {:method          :patch
-                    :uri             (str (config/uri) "/todo/" id)
-                    :headers         {"Authorization" (-> config/conf :api :auth)}
-                    :timeout         5000
-                    :params          val
-                    :format          (edn-request-format)
-                    :response-format (edn-response-format)
-                    :on-success      [:todo/edit-success]
-                    :on-failure      [:todo/edit-fail]}}))
+    {:http-xhrio {:method          :patch
+                  :uri             (str (config/uri) "/todo/" id)
+                  :headers         {"Authorization" (-> config/conf :api :auth)}
+                  :timeout         5000
+                  :params          val
+                  :format          (edn-request-format)
+                  :response-format (edn-response-format)
+                  :on-success      [:todo/edit-success]
+                  :on-failure      [:todo/edit-fail]}}))
 
 (rf/reg-event-db
   :todo/edit-success
   (fn [db [_ data]]
-    (rf/dispatch [:todo/browse])
+    (utils/redirect-page! "#/todo/list")
     db))
 
 (rf/reg-event-db

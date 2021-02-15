@@ -79,11 +79,9 @@
   [:div.p-6
    [spec->fields entity spec]])
 
-(defn form [spec on-submit text key]
-  (let [entity (r/atom (if key @(rf/subscribe [:todo])
-                               {}))]
-    (fn [spec]
-      [:form {:on-submit (on-submit entity)}
-       [form-template entity spec]
-       [:button.mr-5.bg-green-600.hover:bg-green-700.text-white.font-bold.py-2.px-6.rounded-lg
-        (or text "Save")]])))
+(defn form [spec on-submit text init-val]
+  (let [entity (r/atom (or init-val {}))]
+    [:form {:on-submit (on-submit entity)}
+     [form-template entity spec]
+     [:button.mr-5.bg-green-600.hover:bg-green-700.text-white.font-bold.py-2.px-6.rounded-lg
+      (or text "Save")]]))
