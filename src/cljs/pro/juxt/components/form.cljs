@@ -1,6 +1,5 @@
 (ns pro.juxt.components.form
   (:require [pro.juxt.utils :refer [humanize]]
-            [reagent-forms.core :refer [bind-fields init-field value-of]]
             [reagent.core :as r]
             [cljs.core.match :refer [match]]
             [malli.core :as m]
